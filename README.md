@@ -8,5 +8,5 @@ This tracker is designed for tennis fans, coaches, players, as well as tennis to
  ## User Stories
  - I want to be able to add a tennis player to the tracker *(tennis player is X)*
  - I want to be able to view a list of players in the tournament *(tournament is Y)*
- - I want to be able to specify the winner and the loser of a match that has been played (outside of this app)
+ - I want to be able to specify the winner and the loser of a match that has been played outside of this app
  - I want to be able to view a player's win-loss record
