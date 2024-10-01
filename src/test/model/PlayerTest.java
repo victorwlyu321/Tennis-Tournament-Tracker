@@ -17,7 +17,7 @@ public class PlayerTest {
     void testConstructor() {
         assertEquals("Roger Federer", testPlayer.getName());
         assertEquals(0, testPlayer.getMatchWins());
-        assertEquals("Roger Federer", testPlayer.getMatchLosses());
+        assertEquals(0, testPlayer.getMatchLosses());
     }
 
     @Test
