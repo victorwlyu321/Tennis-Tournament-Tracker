@@ -18,6 +18,6 @@ public class Tournament {
 
     // getter
     public ArrayList<Player> getPlayers() {
-        return null;
+        return new ArrayList<>();
     }
 }
