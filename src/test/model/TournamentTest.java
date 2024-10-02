@@ -1,6 +1,7 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 
@@ -53,5 +54,17 @@ public class TournamentTest {
         testTournament.addPlayer(p1);
         assertEquals(1, players.size());
         assertEquals(p1, players.get(0));
+    }
+
+    @Test
+    void testFindPlayer() {
+        testTournament.addPlayer(p1);
+        assertEquals(p1, testTournament.findPlayer("Rafael Nadal"));
+    }
+
+    @Test
+    void tesetFindPlayerDoesNotExist() {
+        testTournament.addPlayer(p1);
+        assertNull(testTournament.findPlayer("Rafael Nadal"));
     }
 }
