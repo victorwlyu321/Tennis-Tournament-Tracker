@@ -65,6 +65,6 @@ public class TournamentTest {
     @Test
     void tesetFindPlayerDoesNotExist() {
         testTournament.addPlayer(p1);
-        assertNull(testTournament.findPlayer("Rafael Nadal"));
+        assertNull(testTournament.findPlayer("Roger Federer"));
     }
 }
