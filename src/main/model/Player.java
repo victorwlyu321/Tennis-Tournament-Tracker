@@ -17,13 +17,13 @@ public class Player {
     }
 
     // MODIFIES: this
-    // EFFECTS: increment player's number of match wins by 1
+    // EFFECTS: increment player's number of match wins
     public void increaseMatchWin() {
         this.wins += 1;
     }
 
     // MODIFIES: this
-    // EFFECTS: increment player's number of match losses by 1
+    // EFFECTS: increment player's number of match losses
     public void increaseMatchLoss() {
         this.losses += 1;
     }
