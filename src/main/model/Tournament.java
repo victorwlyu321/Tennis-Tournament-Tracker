@@ -19,6 +19,11 @@ public class Tournament {
         }
     }
 
+    // EFFECTS: returns a tennis player with the given name
+    public Player findPlayer(String name) {
+        return null;
+    }
+
     // getter
     public ArrayList<Player> getPlayers() {
         return this.players;
