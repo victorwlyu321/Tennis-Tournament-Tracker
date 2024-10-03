@@ -10,14 +10,10 @@ import org.junit.jupiter.api.Test;
 
 public class TournamentTest {
     private Tournament testTournament;
-    private Player p1;
-    private Player p2;
 
     @BeforeEach
     void runBefore() {
         testTournament = new Tournament();
-        p1 = new Player("Rafael Nadal");
-        p2 = new Player("Andy Murray");
     }
 
     @Test
@@ -29,42 +25,42 @@ public class TournamentTest {
     @Test
     void testAddPlayer() {
         ArrayList<Player> players = testTournament.getPlayers();
-        testTournament.addPlayer(p1);
+        testTournament.addPlayer("Rafael Nadal");
         assertEquals(1, players.size());
-        assertEquals(p1, players.get(0));
+        assertEquals("Rafael Nadal", players.get(0).getName());
     }
 
     @Test
     void testAddPlayerMultiple() {
         ArrayList<Player> players = testTournament.getPlayers();
-        testTournament.addPlayer(p1);
+        testTournament.addPlayer("Rafael Nadal");
         assertEquals(1, players.size());
-        assertEquals(p1, players.get(0));
-        testTournament.addPlayer(p2);
+        assertEquals("Rafael Nadal", players.get(0).getName());
+        testTournament.addPlayer("Andy Murray");
         assertEquals(2, players.size());
-        assertEquals(p2, players.get(1));
+        assertEquals("Andy Murray", players.get(1).getName());
     }
 
     @Test
     void testAddPlayerSamePlayer() {
         ArrayList<Player> players = testTournament.getPlayers();
-        testTournament.addPlayer(p1);
+        testTournament.addPlayer("Rafael Nadal");
         assertEquals(1, players.size());
-        assertEquals(p1, players.get(0));
-        testTournament.addPlayer(p1);
+        assertEquals("Rafael Nadal", players.get(0).getName());
+        testTournament.addPlayer("Rafael Nadal");
         assertEquals(1, players.size());
-        assertEquals(p1, players.get(0));
+        assertEquals("Rafael Nadal", players.get(0).getName());
     }
 
     @Test
     void testFindPlayer() {
-        testTournament.addPlayer(p1);
-        assertEquals(p1, testTournament.findPlayer("Rafael Nadal"));
+        testTournament.addPlayer("Rafael Nadal");
+        assertEquals("Rafael Nadal", testTournament.findPlayer("Rafael Nadal").getName());
     }
 
     @Test
     void tesetFindPlayerDoesNotExist() {
-        testTournament.addPlayer(p1);
+        testTournament.addPlayer("Rafael Nadal");
         assertNull(testTournament.findPlayer("Roger Federer"));
     }
 }
