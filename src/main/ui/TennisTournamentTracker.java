@@ -8,12 +8,12 @@ import model.Tournament;
 
 // A Tennis Tournament Application that allows users to add tennis players to a tournament, 
 // view the list of players, view players' win-loss records, and specify the winner and loser of a match
-public class TennisTournamentApp {
+public class TennisTournamentTracker {
     private Tournament tournament;
     private Scanner input;
 
     // EFFECTS: runs the tennis tournament application
-    public TennisTournamentApp() {
+    public TennisTournamentTracker() {
         // stub
     }
 
