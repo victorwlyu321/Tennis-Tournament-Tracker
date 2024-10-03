@@ -19,7 +19,7 @@ public class Tournament {
         }
     }
 
-    // EFFECTS: returns a tennis player with the given name
+    // EFFECTS: returns a tennis player with the given name, otherwise returns null
     public Player findPlayer(String name) {
         for (Player p : this.players) {
             if (p.getName().equals(name)) {
