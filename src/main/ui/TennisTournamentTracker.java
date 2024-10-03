@@ -56,6 +56,9 @@ public class TennisTournamentTracker {
             case "v":
                 displayPlayers();
                 break;
+            case "q":
+                quitTracker();
+                break;
             default:
                 System.out.println("Sorry, please choose a valid option from the menu");
         }
@@ -70,7 +73,7 @@ public class TennisTournamentTracker {
         String newPlayerName = this.input.nextLine();
         Player newPlayer = new Player(newPlayerName);
         tournament.addPlayer(newPlayer);
-        System.out.println("Tennis player has been successfully added to the tournament!");
+        System.out.println(newPlayerName + " has been successfully added to the tournament!");
     }
 
     // EFFECTS: returns a list of players in the tournament
