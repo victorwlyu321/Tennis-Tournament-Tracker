@@ -11,40 +11,66 @@ import model.Tournament;
 public class TennisTournamentTracker {
     private Tournament tournament;
     private Scanner input;
+    private boolean isRunning;
+    private String command;
 
     // EFFECTS: runs the tennis tournament application
     public TennisTournamentTracker() {
-        // stub
+        init();
+
+        System.out.println("Welcome to the Tennis Tournament Tracker!");
+
+        while (this.isRunning) {
+            displayMenu();
+            this.command = this.input.nextLine();
+            this.command = this.command.toLowerCase();
+
+            processCommands(this.command);
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: initializes tennis tournament with starting values
     public void init() {
-        tournament = new Tournament();
-        input = new Scanner(System.in);
-    }
-
-    // EFFECTS: processes user inputs from the main menu
-    private void handleMenu() {
-        // stub
+        this.tournament = new Tournament();
+        this.input = new Scanner(System.in);
+        this.isRunning = true;
     }
 
     // EFFECTS: displays menu options to user
     private void displayMenu() {
-        // stub
+        System.out.println("Please select from the following options:\n");
+        System.out.println("a: Add a new tennis player to the tournament");
+        System.out.println("v: View all players in the tournament");
+        System.out.println("s: Specify the winner and loser of a match");
+        System.out.println("r: View players' win-loss records");
+        System.out.println("q: Exit the application");
     }
 
     // EFFECTS: processes user's input
-    private void processCommand(String input) {
-        // stub
+    private void processCommands(String input) {
+        switch (input) {
+            case "a":
+                addNewPlayer();
+                break;
+            case "v":
+                displayPlayers();
+                break;
+            default:
+                System.out.println("Sorry, please choose a valid option from the menu");
+        }
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a new tennis player and 
+    // EFFECTS: prompts user for a tennis player name, 
+    //          creates a new tennis player with given name and 
     //          adds the player to the list of players in the tournament
-    private void addNewPlayer(String name) {
-        Player newPlayer = new Player(name);
+    private void addNewPlayer() {
+        System.out.println("Please enter the tennis player's name");
+        String newPlayerName = this.input.nextLine();
+        Player newPlayer = new Player(newPlayerName);
         tournament.addPlayer(newPlayer);
+        System.out.println("Tennis player has been successfully added to the tournament!");
     }
 
     // EFFECTS: returns a list of players in the tournament
@@ -89,5 +115,13 @@ public class TennisTournamentTracker {
         String answer = this.input.nextLine();
         Player player = tournament.findPlayer(answer);
         System.out.println("W-L: " + player.getMatchWins() + "-" + player.getMatchLosses());
+    }
+
+    // MODIFIES: this
+    // EFFECTS: returns program quitting messages and sets application to not running
+    private void quitTracker() {
+        System.out.println("Game, set, match!");
+        System.out.println("Thank you for using the Tennis Tournament Tracker!");
+        this.isRunning = false;
     }
 }
