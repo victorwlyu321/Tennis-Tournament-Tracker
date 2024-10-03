@@ -71,8 +71,7 @@ public class TennisTournamentTracker {
     private void addNewPlayer() {
         System.out.println("Please enter the tennis player's name");
         String newPlayerName = this.input.nextLine();
-        Player newPlayer = new Player(newPlayerName);
-        tournament.addPlayer(newPlayer);
+        tournament.addPlayer(newPlayerName);
         System.out.println(newPlayerName + " has been successfully added to the tournament!");
     }
 
