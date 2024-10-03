@@ -12,10 +12,20 @@ public class Tournament {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds a tennis player to the list of players in the tournament
-    public void addPlayer(Player player) {
-        if (!this.players.contains(player)) {
-            this.players.add(player);
+    // EFFECTS: creates and adds a tennis player to the list of players in the tournament
+    public void addPlayer(String name) {
+        boolean playerAlreadyAdded = false;
+
+        for (Player p : this.players) {
+            if (p.getName().equals(name)) {
+                playerAlreadyAdded = true;
+                break;
+            }
+        }
+
+        if (!playerAlreadyAdded) {
+            Player newPlayer = new Player(name);
+            this.players.add(newPlayer);
         }
     }
 
