@@ -146,7 +146,13 @@ public class TennisTournamentTracker {
         System.out.println("Please select a player from the list");
         String selectedPlayer = this.input.nextLine();
         Player player = tournament.findPlayer(selectedPlayer);
-        System.out.println("W-L: " + player.getMatchWins() + "-" + player.getMatchLosses());
+        if (player != null) {
+            System.out.println("W-L: " + player.getMatchWins() + "-" + player.getMatchLosses());
+        } else {
+            System.out.println("Sorry, the player you entered is not in the tournament");
+            displayPlayerRecord();
+        }
+        
     }
 
     // MODIFIES: this
