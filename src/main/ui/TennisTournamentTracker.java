@@ -58,6 +58,9 @@ public class TennisTournamentTracker {
             case "s":
                 specifyPlayer();
                 break;
+            case "r":
+                displayPlayerRecord();
+                break;
             case "q":
                 quitTracker();
                 break;
