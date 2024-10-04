@@ -55,7 +55,9 @@ public class TennisTournamentTracker {
             case "v":
                 displayPlayers();
                 break;
-
+            case "s":
+                specifyPlayer();
+                break;
             case "q":
                 quitTracker();
                 break;
@@ -81,6 +83,7 @@ public class TennisTournamentTracker {
         if (players.isEmpty()) {
             System.out.println("There are no players in the tournament!");
         } else {
+            System.out.println("Here is the list of players in the tournament:");
             for (Player p : players) {
                 System.out.println(p.getName());
             }
@@ -91,43 +94,47 @@ public class TennisTournamentTracker {
     // prompts user to enter the names of the winner and loser of a tennis match
     private void specifyPlayer() {
         displayPlayers();
-        System.out.println("Please enter the name of the winning player");
-        String winner = this.input.nextLine();
-        specifyWinner(winner);
+        specifyWinner();
         specifyLoser();
+        System.out.println("The winner and loser of the match have been successfully recorded");
     }
 
     // MODIFIES: this
     // EFFECTS: prompts user for the winner and increases the number of match wins for that player
-    private void specifyWinner(String winner) {
-        Player player = tournament.findPlayer(winner);
-        if (player != null) {
-            player.increaseMatchWin();
-        } else {
-            System.out.println("Sorry, the player you entered is not in the tournament");
-            specifyPlayer();
+    private void specifyWinner() {
+        boolean playerNotFound = true;
+
+        while (playerNotFound) {
+            System.out.println("Please enter the name of the winning player:");
+            String winner = this.input.nextLine();
+            Player player = tournament.findPlayer(winner);
+            if (player != null) {
+                player.increaseMatchWin();
+                playerNotFound = false;
+            } else {
+                System.out.println("Sorry, the player you entered is not in the tournament");
+                displayPlayers();
+            }
         }
     }
 
     // MODIFIES: this
     // EFFECTS: prompts user for the loser and increases the number of match losses for that player
     private void specifyLoser() {
-        boolean playerExist = false;
+        boolean playerNotFound = true;
 
-        while (!playerExist) {
-            System.out.println("Please enter the name of the losing player");
+        while (playerNotFound) {
+            System.out.println("Please enter the name of the losing player:");
             String loser = this.input.nextLine();
             Player player = tournament.findPlayer(loser);
             if (player != null) {
                 player.increaseMatchLoss();
-                playerExist = true;
+                playerNotFound = false;
             } else {
                 System.out.println("Sorry, the player you entered is not in the tournament");
                 displayPlayers();
             }
-
         }
-
     }
 
     // EFFECTS: returns a player's win-loss record
