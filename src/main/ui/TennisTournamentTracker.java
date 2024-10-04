@@ -56,6 +56,7 @@ public class TennisTournamentTracker {
             case "v":
                 displayPlayers();
                 break;
+
             case "q":
                 quitTracker();
                 break;
@@ -87,13 +88,20 @@ public class TennisTournamentTracker {
         }
     }
 
-    // EFFECTS: prompts user to select a tennis player from list of players
-    private Player selectPlayer(String player) {
-        return null;
+    // EFFECTS: displays list of players and 
+    // prompts user to enter the names of the winner and loser of a tennis match
+    private void specifyPlayer() {
+        displayPlayers();
+        System.out.println("Please enter the name of the winning player");
+        this.command = this.input.nextLine();
+        specifyWinner(command);
+        System.out.println("Please enter the name of the losing player");
+        this.command = this.input.nextLine();
+        specifyLoser(command);
     }
 
     // MODIFIES: this
-    // EFFECTS: selects the winner of a match and increases the number of match wins of the player
+    // EFFECTS: prompts user for the winner and increases the number of match wins for that winner player
     private void specifyWinner(String winner) {
         Player player = tournament.findPlayer(winner);
         if (player != null) {
