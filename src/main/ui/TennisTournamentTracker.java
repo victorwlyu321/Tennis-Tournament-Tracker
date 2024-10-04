@@ -12,7 +12,6 @@ public class TennisTournamentTracker {
     private Tournament tournament;
     private Scanner input;
     private boolean isRunning;
-    private String command;
 
     // EFFECTS: runs the tennis tournament application
     public TennisTournamentTracker() {
@@ -22,10 +21,10 @@ public class TennisTournamentTracker {
 
         while (this.isRunning) {
             displayMenu();
-            this.command = this.input.nextLine();
-            this.command = this.command.toLowerCase();
+            String command = this.input.nextLine();
+            command = command.toLowerCase();
 
-            processCommands(this.command);
+            processCommands(command);
         }
     }
 
@@ -93,11 +92,11 @@ public class TennisTournamentTracker {
     private void specifyPlayer() {
         displayPlayers();
         System.out.println("Please enter the name of the winning player");
-        this.command = this.input.nextLine();
-        specifyWinner(command);
+        String winner = this.input.nextLine();
+        specifyWinner(winner);
         System.out.println("Please enter the name of the losing player");
-        this.command = this.input.nextLine();
-        specifyLoser(command);
+        String loser = this.input.nextLine();
+        specifyLoser(loser);
     }
 
     // MODIFIES: this
@@ -122,8 +121,8 @@ public class TennisTournamentTracker {
     private void displayPlayerRecord() {
         displayPlayers();
         System.out.println("Please select a player from the list");
-        String answer = this.input.nextLine();
-        Player player = tournament.findPlayer(answer);
+        String selectedPlayer = this.input.nextLine();
+        Player player = tournament.findPlayer(selectedPlayer);
         System.out.println("W-L: " + player.getMatchWins() + "-" + player.getMatchLosses());
     }
 
