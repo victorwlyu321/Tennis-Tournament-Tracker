@@ -94,27 +94,40 @@ public class TennisTournamentTracker {
         System.out.println("Please enter the name of the winning player");
         String winner = this.input.nextLine();
         specifyWinner(winner);
-        System.out.println("Please enter the name of the losing player");
-        String loser = this.input.nextLine();
-        specifyLoser(loser);
+        specifyLoser();
     }
 
     // MODIFIES: this
-    // EFFECTS: prompts user for the winner and increases the number of match wins for that winner player
+    // EFFECTS: prompts user for the winner and increases the number of match wins for that player
     private void specifyWinner(String winner) {
         Player player = tournament.findPlayer(winner);
         if (player != null) {
             player.increaseMatchWin();
+        } else {
+            System.out.println("Sorry, the player you entered is not in the tournament");
+            specifyPlayer();
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: selects the loser of a match and increases the number of match losses of the player
-    private void specifyLoser(String loser) {
-        Player player = tournament.findPlayer(loser);
-        if (player != null) {
-            player.increaseMatchLoss();
+    // EFFECTS: prompts user for the loser and increases the number of match losses for that player
+    private void specifyLoser() {
+        boolean playerExist = false;
+
+        while (!playerExist) {
+            System.out.println("Please enter the name of the losing player");
+            String loser = this.input.nextLine();
+            Player player = tournament.findPlayer(loser);
+            if (player != null) {
+                player.increaseMatchLoss();
+                playerExist = true;
+            } else {
+                System.out.println("Sorry, the player you entered is not in the tournament");
+                displayPlayers();
+            }
+
         }
+
     }
 
     // EFFECTS: returns a player's win-loss record
