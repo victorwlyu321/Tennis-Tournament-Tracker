@@ -102,20 +102,21 @@ public class TennisTournamentTracker {
     //          prompts user to enter the names of the winner and loser of a tennis match
     private void specifyPlayer() {
         displayPlayers();
-        specifyWinner();
-        specifyLoser();
+        String previousWinner = specifyWinner();
+        specifyLoser(previousWinner);
         System.out.println("The winner and loser of the match have been successfully recorded");
         printDivider();
     }
 
     // MODIFIES: this
     // EFFECTS: prompts user for the winner and increases the number of match wins for that player
-    private void specifyWinner() {
+    private String specifyWinner() {
         boolean playerNotFound = true;
+        String winner = "";
 
         while (playerNotFound) {
             System.out.println("Please enter the name of the winning player:");
-            String winner = this.input.nextLine();
+            winner = this.input.nextLine();
             Player player = tournament.findPlayer(winner);
             if (player != null) {
                 player.increaseMatchWin();
@@ -125,16 +126,22 @@ public class TennisTournamentTracker {
                 displayPlayers();
             }
         }
+        return winner;
     }
 
     // MODIFIES: this
-    // EFFECTS: prompts user for the loser and increases the number of match losses for that player
-    private void specifyLoser() {
+    // EFFECTS: prompts user for the loser, checks if the loser is the same as winner, 
+    //          and increases the number of match losses for that player
+    private void specifyLoser(String prevWinner) {
         boolean playerNotFound = true;
 
         while (playerNotFound) {
             System.out.println("Please enter the name of the losing player:");
             String loser = this.input.nextLine();
+            if (loser.equals(prevWinner)) {
+                System.out.println("The winner and loser of the match cannot be the same player.");
+                continue;
+            }
             Player player = tournament.findPlayer(loser);
             if (player != null) {
                 player.increaseMatchLoss();
