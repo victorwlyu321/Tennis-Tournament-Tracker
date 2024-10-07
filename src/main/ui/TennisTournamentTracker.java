@@ -68,19 +68,25 @@ public class TennisTournamentTracker {
                 break;
             default:
                 System.out.println("Sorry, please choose a valid option from the menu");
+                printDivider();
         }
     }
 
     // MODIFIES: this
     // EFFECTS: prompts user for a tennis player name, 
+    //          checks if tennis player is already in the tournmanet,
     //          creates a new tennis player with given name and 
     //          adds the player to the list of players in the tournament
     private void addNewPlayer() {
         System.out.println("Please enter the tennis player's name");
         String newPlayerName = this.input.nextLine();
-        tournament.addPlayer(newPlayerName);
-        System.out.println(newPlayerName + " has been successfully added to the tournament!");
-        printDivider();
+        if (tournament.addPlayer(newPlayerName)) {
+            System.out.println(newPlayerName + " has been successfully added to the tournament!");
+            printDivider();
+        } else {
+            System.out.println("The player entered is already in the tournament");
+            printDivider();
+        }
     }
 
     // EFFECTS: prints out a list of players in the tournament
