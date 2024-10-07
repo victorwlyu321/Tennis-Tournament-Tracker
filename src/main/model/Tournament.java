@@ -12,8 +12,9 @@ public class Tournament {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates and adds a tennis player to the list of players in the tournament
-    public void addPlayer(String name) {
+    // EFFECTS: returns true if the given player is already in tournament,
+    //          otherwise returns false and creates and adds a tennis player to the list of players in the tournament
+    public boolean addPlayer(String name) {
         boolean playerAlreadyAdded = false;
 
         for (Player p : this.players) {
@@ -27,6 +28,8 @@ public class Tournament {
             Player newPlayer = new Player(name);
             this.players.add(newPlayer);
         }
+
+        return playerAlreadyAdded;
     }
 
     // EFFECTS: returns a tennis player with the given name, otherwise returns null

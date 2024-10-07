@@ -1,7 +1,9 @@
 package model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -25,7 +27,7 @@ public class TournamentTest {
     @Test
     void testAddPlayer() {
         ArrayList<Player> players = testTournament.getPlayers();
-        testTournament.addPlayer("Rafael Nadal");
+        assertFalse(testTournament.addPlayer("Rafael Nadal"));
         assertEquals(1, players.size());
         assertEquals("Rafael Nadal", players.get(0).getName());
     }
@@ -33,10 +35,10 @@ public class TournamentTest {
     @Test
     void testAddPlayerMultiple() {
         ArrayList<Player> players = testTournament.getPlayers();
-        testTournament.addPlayer("Rafael Nadal");
+        assertFalse(testTournament.addPlayer("Rafael Nadal"));
         assertEquals(1, players.size());
         assertEquals("Rafael Nadal", players.get(0).getName());
-        testTournament.addPlayer("Andy Murray");
+        assertFalse(testTournament.addPlayer("Andy Murray"));
         assertEquals(2, players.size());
         assertEquals("Andy Murray", players.get(1).getName());
     }
@@ -44,10 +46,10 @@ public class TournamentTest {
     @Test
     void testAddPlayerSamePlayer() {
         ArrayList<Player> players = testTournament.getPlayers();
-        testTournament.addPlayer("Rafael Nadal");
+        assertFalse(testTournament.addPlayer("Rafael Nadal"));
         assertEquals(1, players.size());
         assertEquals("Rafael Nadal", players.get(0).getName());
-        testTournament.addPlayer("Rafael Nadal");
+        assertTrue(testTournament.addPlayer("Rafael Nadal"));
         assertEquals(1, players.size());
         assertEquals("Rafael Nadal", players.get(0).getName());
     }
