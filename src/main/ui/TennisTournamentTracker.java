@@ -67,7 +67,7 @@ public class TennisTournamentTracker {
                 quitTracker();
                 break;
             default:
-                System.out.println("Sorry, please choose a valid option from the menu");
+                System.out.println("Sorry, please choose a valid option from the menu.");
                 printDivider();
         }
     }
@@ -78,13 +78,13 @@ public class TennisTournamentTracker {
     //          creates a new tennis player with given name and 
     //          adds the player to the list of players in the tournament
     private void addNewPlayer() {
-        System.out.println("Please enter the tennis player's name");
+        System.out.println("Please enter the tennis player's name.");
         String newPlayerName = this.input.nextLine();
         if (tournament.addPlayer(newPlayerName)) {
             System.out.println(newPlayerName + " has been successfully added to the tournament!");
             printDivider();
         } else {
-            System.out.println("The player entered is already in the tournament");
+            System.out.println("The player entered is already in the tournament.");
             printDivider();
         }
     }
@@ -104,14 +104,20 @@ public class TennisTournamentTracker {
         printDivider();
     }
 
-    // EFFECTS: displays list of players and 
+    // EFFECTS: checks if there are enough players in the tournament, 
+    //          displays list of players and 
     //          prompts user to enter the names of the winner and loser of a tennis match
     private void specifyPlayer() {
-        displayPlayers();
-        String previousWinner = specifyWinner();
-        specifyLoser(previousWinner);
-        System.out.println("The winner and loser of the match have been successfully recorded");
-        printDivider();
+        if (!enoughPlayers()) {
+            printNotEnoughPlayers();
+            printDivider();
+        } else {
+            displayPlayers();
+            String previousWinner = specifyWinner();
+            specifyLoser(previousWinner);
+            System.out.println("The winner and loser of the match have been successfully recorded.");
+            printDivider();
+        }
     }
 
     // MODIFIES: this
@@ -128,7 +134,7 @@ public class TennisTournamentTracker {
                 player.increaseMatchWin();
                 playerNotFound = false;
             } else {
-                System.out.println("Sorry, the player you entered is not in the tournament");
+                printPlayerNotInTournament();
                 displayPlayers();
             }
         }
@@ -153,24 +159,30 @@ public class TennisTournamentTracker {
                 player.increaseMatchLoss();
                 playerNotFound = false;
             } else {
-                System.out.println("Sorry, the player you entered is not in the tournament");
+                printPlayerNotInTournament();
                 displayPlayers();
             }
         }
     }
 
-    // EFFECTS: prints out a player's win-loss record
+    // EFFECTS: checks if there are enough players in the tournament and 
+    //          prints out a player's win-loss record
     private void displayPlayerRecord() {
-        displayPlayers();
-        System.out.println("Please select a player from the list:");
-        String selectedPlayer = this.input.nextLine();
-        Player player = tournament.findPlayer(selectedPlayer);
-        if (player != null) {
-            System.out.println(player.getName() + " - W-L: " + player.getMatchWins() + "-" + player.getMatchLosses());
+        if (!enoughPlayers()) {
+            printNotEnoughPlayers();
             printDivider();
         } else {
-            System.out.println("Sorry, the player you entered is not in the tournament");
-            displayPlayerRecord();
+            displayPlayers();
+            System.out.println("Please select a player from the list:");
+            String selectedPlayer = this.input.nextLine();
+            Player player = tournament.findPlayer(selectedPlayer);
+            if (player != null) {
+                System.out.println(player.getName() + " - W-L: " + player.getMatchWins() + "-" + player.getMatchLosses());
+                printDivider();
+            } else {
+                printPlayerNotInTournament();
+                displayPlayerRecord();
+            }
         }
     }
 
@@ -186,5 +198,20 @@ public class TennisTournamentTracker {
     // EFFECTS: print out lines as dividers in console
     private void printDivider() {
         System.out.println("=============================================");
+    }
+
+    // EFFECTS: print out player not in tournament message
+    private void printPlayerNotInTournament() {
+        System.out.println("Sorry, the player you entered is not in the tournament.");
+    }
+
+    // EFFECTS: print out not enough players message
+    private void printNotEnoughPlayers() {
+        System.out.println("There are not enough players in the tournament for a match to be played.");
+    }
+
+    // EFFECTS: returns true if there are 2 or more players in the tournament
+    private boolean enoughPlayers() {
+        return this.tournament.getPlayers().size() >= 2;
     }
 }
