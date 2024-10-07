@@ -16,6 +16,7 @@ public class Tournament {
     //          otherwise returns false and creates and adds a tennis player to the list of players in the tournament
     public boolean addPlayer(String name) {
         boolean playerAlreadyAdded = false;
+        boolean newPlayerAdded = false;
 
         for (Player p : this.players) {
             if (p.getName().equals(name)) {
@@ -23,13 +24,12 @@ public class Tournament {
                 break;
             }
         }
-
         if (!playerAlreadyAdded) {
             Player newPlayer = new Player(name);
             this.players.add(newPlayer);
+            newPlayerAdded = true;
         }
-
-        return playerAlreadyAdded;
+        return newPlayerAdded;
     }
 
     // EFFECTS: returns a tennis player with the given name, otherwise returns null

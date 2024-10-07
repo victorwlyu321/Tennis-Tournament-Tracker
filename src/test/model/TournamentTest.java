@@ -27,7 +27,7 @@ public class TournamentTest {
     @Test
     void testAddPlayer() {
         ArrayList<Player> players = testTournament.getPlayers();
-        assertFalse(testTournament.addPlayer("Rafael Nadal"));
+        assertTrue(testTournament.addPlayer("Rafael Nadal"));
         assertEquals(1, players.size());
         assertEquals("Rafael Nadal", players.get(0).getName());
     }
@@ -35,10 +35,10 @@ public class TournamentTest {
     @Test
     void testAddPlayerMultiple() {
         ArrayList<Player> players = testTournament.getPlayers();
-        assertFalse(testTournament.addPlayer("Rafael Nadal"));
+        assertTrue(testTournament.addPlayer("Rafael Nadal"));
         assertEquals(1, players.size());
         assertEquals("Rafael Nadal", players.get(0).getName());
-        assertFalse(testTournament.addPlayer("Andy Murray"));
+        assertTrue(testTournament.addPlayer("Andy Murray"));
         assertEquals(2, players.size());
         assertEquals("Andy Murray", players.get(1).getName());
     }
@@ -46,10 +46,10 @@ public class TournamentTest {
     @Test
     void testAddPlayerSamePlayer() {
         ArrayList<Player> players = testTournament.getPlayers();
-        assertFalse(testTournament.addPlayer("Rafael Nadal"));
+        assertTrue(testTournament.addPlayer("Rafael Nadal"));
         assertEquals(1, players.size());
         assertEquals("Rafael Nadal", players.get(0).getName());
-        assertTrue(testTournament.addPlayer("Rafael Nadal"));
+        assertFalse(testTournament.addPlayer("Rafael Nadal"));
         assertEquals(1, players.size());
         assertEquals("Rafael Nadal", players.get(0).getName());
     }
