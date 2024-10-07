@@ -48,6 +48,7 @@ public class TennisTournamentTracker {
         System.out.println("q: Exit the application");
     }
 
+    // MODIFIES: this
     // EFFECTS: processes user's input
     private void processCommands(String input) {
         switch (input) {
@@ -141,6 +142,7 @@ public class TennisTournamentTracker {
         return winner;
     }
 
+    // REQUIRES: a non-zero length string from user's previous winner input
     // MODIFIES: this
     // EFFECTS: prompts user for the loser, checks if the loser is the same as winner, 
     //          and increases the number of match losses for that player
@@ -165,7 +167,7 @@ public class TennisTournamentTracker {
         }
     }
 
-    // EFFECTS: checks if there are enough players in the tournament and 
+    // EFFECTS: checks if there are enough players in the tournament, 
     //          prints out a player's win-loss record
     private void displayPlayerRecord() {
         if (!enoughPlayers()) {
@@ -177,7 +179,8 @@ public class TennisTournamentTracker {
             String selectedPlayer = this.input.nextLine();
             Player player = tournament.findPlayer(selectedPlayer);
             if (player != null) {
-                System.out.println(player.getName() + " - W-L: " + player.getMatchWins() + "-" + player.getMatchLosses());
+                System.out.println(player.getName() + " - W-L: " 
+                                + player.getMatchWins() + "-" + player.getMatchLosses());
                 printDivider();
             } else {
                 printPlayerNotInTournament();
@@ -195,17 +198,17 @@ public class TennisTournamentTracker {
         this.isRunning = false;
     }
 
-    // EFFECTS: print out lines as dividers in console
+    // EFFECTS: prints out lines as dividers in console
     private void printDivider() {
         System.out.println("=============================================");
     }
 
-    // EFFECTS: print out player not in tournament message
+    // EFFECTS: prints out player not in tournament message
     private void printPlayerNotInTournament() {
         System.out.println("Sorry, the player you entered is not in the tournament.");
     }
 
-    // EFFECTS: print out not enough players message
+    // EFFECTS: prints out not enough players message
     private void printNotEnoughPlayers() {
         System.out.println("There are not enough players in the tournament for a match to be played.");
     }
