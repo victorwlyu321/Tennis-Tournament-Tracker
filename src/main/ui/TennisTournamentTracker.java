@@ -6,14 +6,14 @@ import java.util.Scanner;
 import model.Player;
 import model.Tournament;
 
-// A Tennis Tournament Application that allows users to add tennis players to a tournament, 
-// view the list of players, view players' win-loss records, and specify the winner and loser of a match
+// A Tennis Tournament Tracker that allows users to add tennis players to a tournament, 
+// view the list of players, specify the winner and loser of a match, and view players' win-loss records
 public class TennisTournamentTracker {
     private Tournament tournament;
     private Scanner input;
     private boolean isRunning;
 
-    // EFFECTS: runs the tennis tournament application
+    // EFFECTS: runs the tennis tournament tracker
     public TennisTournamentTracker() {
         init();
 
@@ -74,10 +74,8 @@ public class TennisTournamentTracker {
     }
 
     // MODIFIES: this
-    // EFFECTS: prompts user for a tennis player name, 
-    //          checks if tennis player is already in the tournmanet,
-    //          creates a new tennis player with given name and 
-    //          adds the player to the list of players in the tournament
+    // EFFECTS: creates and adds a tennis player to the list of players in the tournament
+    //          if the player is not already in the tournament
     private void addNewPlayer() {
         System.out.println("Please enter the tennis player's name.");
         String newPlayerName = this.input.nextLine();
@@ -90,7 +88,7 @@ public class TennisTournamentTracker {
         }
     }
 
-    // EFFECTS: prints out a list of players in the tournament
+    // EFFECTS: displays the list of players in the tournament
     private void displayPlayers() {
         ArrayList<Player> players = tournament.getPlayers();
         printDivider();
@@ -105,9 +103,9 @@ public class TennisTournamentTracker {
         printDivider();
     }
 
-    // EFFECTS: checks if there are enough players in the tournament, 
-    //          displays list of players and 
-    //          prompts user to enter the names of the winner and loser of a tennis match
+    // MODIFIES: this
+    // EFFECTS: allows users to specify the winner and loser of a match if there are enough players 
+    //          in the tournament for a match to be played
     private void specifyPlayer() {
         if (!enoughPlayers()) {
             printNotEnoughPlayers();
@@ -122,7 +120,8 @@ public class TennisTournamentTracker {
     }
 
     // MODIFIES: this
-    // EFFECTS: prompts user for the winner and increases the number of match wins for that player
+    // EFFECTS: specifies the winner, increases the number of match wins for that player and returns the winner
+    //          if the winner entered is in the tournament
     private String specifyWinner() {
         boolean playerNotFound = true;
         String winner = "";
@@ -144,8 +143,9 @@ public class TennisTournamentTracker {
 
     // REQUIRES: a non-zero length string from user's previous winner input
     // MODIFIES: this
-    // EFFECTS: prompts user for the loser, checks if the loser is the same as winner, 
-    //          and increases the number of match losses for that player
+    // EFFECTS: specifies the loser and increases the number of match losses for that player
+    //          if the winner from previous input and loser are not the same player and
+    //          if the loser entered is in the tournament
     private void specifyLoser(String prevWinner) {
         boolean playerNotFound = true;
 
@@ -167,8 +167,7 @@ public class TennisTournamentTracker {
         }
     }
 
-    // EFFECTS: checks if there are enough players in the tournament, 
-    //          prints out a player's win-loss record
+    // EFFECTS: prints out a player's win-loss record if there are enough players in the tournament
     private void displayPlayerRecord() {
         if (!enoughPlayers()) {
             printNotEnoughPlayers();
@@ -213,7 +212,7 @@ public class TennisTournamentTracker {
         System.out.println("There are not enough players in the tournament for a match to be played.");
     }
 
-    // EFFECTS: returns true if there are 2 or more players in the tournament
+    // EFFECTS: returns true if there 2 or more players in the tournament
     private boolean enoughPlayers() {
         return this.tournament.getPlayers().size() >= 2;
     }

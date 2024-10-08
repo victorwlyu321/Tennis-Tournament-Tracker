@@ -12,8 +12,7 @@ public class Tournament {
     }
 
     // MODIFIES: this
-    // EFFECTS: returns true if the given player is already in tournament,
-    //          otherwise returns false and creates and adds a tennis player to the list of players in the tournament
+    // EFFECTS: returns true if a new tennis player has been created and added to the list of players in the tournament
     public boolean addPlayer(String name) {
         boolean playerAlreadyAdded = false;
         boolean newPlayerAdded = false;
@@ -32,7 +31,7 @@ public class Tournament {
         return newPlayerAdded;
     }
 
-    // EFFECTS: returns a tennis player with the given name, otherwise returns null
+    // EFFECTS: returns a tennis player with the given name if found
     public Player findPlayer(String name) {
         for (Player p : this.players) {
             if (p.getName().equals(name)) {
