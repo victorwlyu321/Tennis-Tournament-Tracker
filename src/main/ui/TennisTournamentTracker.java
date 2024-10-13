@@ -6,6 +6,8 @@ import java.util.Scanner;
 import model.Player;
 import model.Tournament;
 
+// Referenced TellerApp and Flashcard Reviewer for UI structure, logic flow, and design
+
 // A Tennis Tournament Tracker that allows users to add tennis players to a tournament, 
 // view the list of players, specify the winner and loser of a match, and view players' win-loss records
 public class TennisTournamentTracker {
