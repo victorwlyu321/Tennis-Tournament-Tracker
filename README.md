@@ -10,5 +10,5 @@ This tracker is designed for tennis fans, coaches, players, as well as tennis to
  - I want to be able to view a list of players in the tournament *(tournament is Y)*
  - I want to be able to specify the winner and the loser of a match that has been played outside of this app
  - I want to be able to view a player's win-loss record
- - As a user, I want to be reminded to save the list of tennis players in the tournament and have the option to do so when I quit the tennis tournament tracker
- - As a user, I want to be given the option to load my list of tennis players into the tennis tournament tracker from file when I start the tracker application
+ - As a user, I want to be able to save the list of tennis players in the tournament if I like
+ - As a user, I want to be able to load my list of tennis players into the tennis tournament tracker from file if I like
