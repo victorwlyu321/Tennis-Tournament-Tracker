@@ -2,8 +2,15 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
+// Referenced WorkRoom in JsonSerializationDemo
+
 // Represents a tennis tournament having a list of participating tennis players
-public class Tournament {
+public class Tournament implements Writable {
     private ArrayList<Player> players;
 
     // EFFECTS: create a tournament with an empty list of tennis players
@@ -44,5 +51,23 @@ public class Tournament {
     // getter
     public ArrayList<Player> getPlayers() {
         return this.players;
+    }
+
+    // EFFECTS: puts player JSON array into JSON object and returns JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("players", playersToJson());
+        return json;
+    }
+
+    // EFFECTS: returns players in tournament as a JSON array
+    public JSONArray playersToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Player p : this.players) {
+            jsonArray.put(p.toJson());
+        }
+        return jsonArray;
     }
 }
