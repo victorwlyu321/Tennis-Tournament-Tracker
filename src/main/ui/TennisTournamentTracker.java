@@ -65,31 +65,23 @@ public class TennisTournamentTracker {
     // MODIFIES: this
     // EFFECTS: processes user's input
     private void processCommands(String input) {
-        switch (input) {
-            case "a":
-                addNewPlayer();
-                break;
-            case "v":
-                displayPlayers();
-                break;
-            case "p":
-                specifyPlayer();
-                break;
-            case "r":
-                displayPlayerRecord();
-                break;
-            case "s":
-                saveTournament();
-                break;
-            case "l":
-                loadTournament();
-                break;
-            case "q":
-                quitTracker();
-                break;
-            default:
-                System.out.println("Sorry, please choose a valid option from the menu.");
-                printDivider();
+        if (input.equals("a")) {
+            addNewPlayer();
+        } else if (input.equals("v")) {
+            displayPlayers();
+        } else if (input.equals("p")) {
+            specifyPlayer();
+        } else if (input.equals("r")) {
+            displayPlayerRecord();
+        } else if (input.equals("s")) {
+            saveTournament();
+        } else if (input.equals("l")) {
+            loadTournament();
+        } else if (input.equals("q")) {
+            quitTracker();
+        } else {
+            System.out.println("Sorry, please choose a valid option from the menu.");
+            printDivider();
         }
     }
 
