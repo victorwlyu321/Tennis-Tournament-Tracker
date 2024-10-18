@@ -2,6 +2,7 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -60,5 +61,13 @@ public class PlayerTest {
         testPlayer.increaseMatchLoss();
         assertEquals(3, testPlayer.getMatchLosses());
         assertEquals(0, testPlayer.getMatchWins());
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject testJson = testPlayer.toJson();
+        assertEquals("Roger Federer", testJson.get("name"));
+        assertEquals(0, testJson.get("wins"));
+        assertEquals(0, testJson.get("losses"));
     }
 }
