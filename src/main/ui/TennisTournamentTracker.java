@@ -24,7 +24,7 @@ public class TennisTournamentTracker {
     private static final String JSON_FILE = "./data/TennisTournamentTracker.json";
 
     // EFFECTS: runs the tennis tournament tracker
-    public TennisTournamentTracker() {
+    public TennisTournamentTracker() throws FileNotFoundException {
         init();
 
         printDivider();
@@ -42,7 +42,7 @@ public class TennisTournamentTracker {
 
     // MODIFIES: this
     // EFFECTS: initializes tennis tournament with starting values
-    public void init() {
+    public void init() throws FileNotFoundException {
         this.tournament = new Tournament();
         this.input = new Scanner(System.in);
         this.isRunning = true;
