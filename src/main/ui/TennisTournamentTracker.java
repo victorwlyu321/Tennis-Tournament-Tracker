@@ -1,10 +1,14 @@
 package ui;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.Player;
 import model.Tournament;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 // Referenced TellerApp and Flashcard Reviewer for UI structure, logic flow, and design
 // Referenced WorkRoomApp in JsonSerializationDemo for incorporating json reading and writing
@@ -15,7 +19,9 @@ public class TennisTournamentTracker {
     private Tournament tournament;
     private Scanner input;
     private boolean isRunning;
-    // Fields for jsonReader and jsonWriter
+    private JsonReader jsonReader;
+    private JsonWriter jsonWriter;
+    private static final String JSON_FILE = "./data/TennisTournamentTracker.json";
 
     // EFFECTS: runs the tennis tournament tracker
     public TennisTournamentTracker() {
@@ -40,7 +46,8 @@ public class TennisTournamentTracker {
         this.tournament = new Tournament();
         this.input = new Scanner(System.in);
         this.isRunning = true;
-        // initialize jsonReader and JsonWriter
+        jsonReader = new JsonReader(JSON_FILE);
+        jsonWriter = new JsonWriter(JSON_FILE);
     }
 
     // EFFECTS: displays menu options to user
@@ -48,9 +55,10 @@ public class TennisTournamentTracker {
         System.out.println("Please select from the following options:\n");
         System.out.println("a: Add a new tennis player to the tournament");
         System.out.println("v: View all players in the tournament");
-        System.out.println("s: Specify the winner and loser of a match");
+        System.out.println("p: Specify the winner and loser of a match");
         System.out.println("r: View players' win-loss records");
-        // add options for save and load
+        System.out.println("s: Save Tennis Tournament Tracker to file");
+        System.out.println("l: Load Tennis Tournament Tracker from file");
         System.out.println("q: Exit the application");
     }
 
@@ -64,13 +72,18 @@ public class TennisTournamentTracker {
             case "v":
                 displayPlayers();
                 break;
-            case "s":
+            case "p":
                 specifyPlayer();
                 break;
             case "r":
                 displayPlayerRecord();
                 break;
-            // add cases for save and load options
+            case "s":
+                saveTournament();
+                break;
+            case "l":
+                loadTournament();
+                break;
             case "q":
                 quitTracker();
                 break;
@@ -206,13 +219,25 @@ public class TennisTournamentTracker {
 
     // EFFECTS: saves the tournament to file
     private void saveTournament() {
-        // stub
+        try {
+            jsonWriter.open();
+            jsonWriter.write(tournament);
+            jsonWriter.close();
+            System.out.println("Your Tennis Tournament Tracker has been saved to " + JSON_FILE + "!");
+        } catch (FileNotFoundException e) {
+            System.out.println("Saving Tennis Tournament Tracker to " + JSON_FILE + "was UNSUCCESSFUL.");
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: loads tournament from file
     private void loadTournament() {
-
+        try {
+            tournament = jsonReader.read();
+            System.out.println("Your Tennis Tournament Tracker from " + JSON_FILE + "has been successfully loaded!");
+        } catch (IOException e) {
+            System.out.println("Loading Tennis Tournament Tracker from " + JSON_FILE + "was UNSUCCESSFULL.");
+        }
     }
 
     // EFFECTS: prints out lines as dividers in console
