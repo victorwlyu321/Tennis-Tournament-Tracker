@@ -66,8 +66,8 @@ public class PlayerTest {
     @Test
     void testToJson() {
         JSONObject testJson = testPlayer.toJson();
-        assertEquals("Roger Federer", testJson.get("name"));
-        assertEquals(0, testJson.get("wins"));
-        assertEquals(0, testJson.get("losses"));
+        assertEquals("Roger Federer", testJson.getString("name"));
+        assertEquals(0, testJson.getInt("wins"));
+        assertEquals(0, testJson.getInt("losses"));
     }
 }
