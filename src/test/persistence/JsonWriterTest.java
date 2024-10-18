@@ -53,6 +53,16 @@ public class JsonWriterTest extends JsonTest {
             Tournament tn = new Tournament();
             assertTrue(tn.addPlayer("Roger Federer"));
             assertTrue(tn.addPlayer("Rafael Nadal"));
+            Player p1 = tn.findPlayer("Roger Federer");
+            Player p2 = tn.findPlayer("Rafael Nadal");
+            p1.increaseMatchWin();
+            p1.increaseMatchWin();
+            p1.increaseMatchWin();
+            p1.increaseMatchLoss();
+            p2.increaseMatchWin();
+            p2.increaseMatchWin();
+            p2.increaseMatchLoss();
+            p2.increaseMatchLoss();
             JsonWriter writer = new JsonWriter("./data/testWriterRegularTournament.json");
             writer.open();
             writer.write(tn);
@@ -62,8 +72,8 @@ public class JsonWriterTest extends JsonTest {
             tn = reader.read();
             ArrayList<Player> players = tn.getPlayers();
             assertEquals(2, players.size());
-            checkPlayer("Roger Federer", 0, 0, players.get(0));
-            checkPlayer("Rafael Nadal", 0, 0, players.get(1));
+            checkPlayer("Roger Federer", 3, 1, players.get(0));
+            checkPlayer("Rafael Nadal", 2, 2, players.get(1));
         } catch (IOException e) {
             fail("IOException should not have been thrown");
         }

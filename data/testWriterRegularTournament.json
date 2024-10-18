@@ -1,0 +1,12 @@
+{"players": [
+    {
+        "wins": 3,
+        "name": "Roger Federer",
+        "losses": 1
+    },
+    {
+        "wins": 2,
+        "name": "Rafael Nadal",
+        "losses": 2
+    }
+]}
