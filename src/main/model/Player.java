@@ -1,8 +1,14 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
+// Referenced Thingy in JsonSerializationDemo
+
 // Represents a tennis player having a name, number of match wins, 
 // and number of match losses
-public class Player {
+public class Player implements Writable {
     private String name;
     private int wins;
     private int losses;
@@ -41,5 +47,15 @@ public class Player {
     // getter
     public int getMatchLosses() {
         return this.losses;
+    }
+
+    // EFFECTS: puts player name, wins, and losses into JSON object and returns JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", this.name);
+        json.put("wins", this.wins);
+        json.put("losses", this.losses);
+        return json;
     }
 }
