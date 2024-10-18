@@ -12,8 +12,9 @@ import model.Player;
 import model.Tournament;
 
 // Referenced JsonReader in JsonSerializationDemo
+// Referenced https://stleary.github.io/JSON-java/index.html
 
-// Represents a reader that reads tennis tournament player list from JSON data stored in file
+// Represents a reader that reads tennis tournament from JSON data stored in file
 public class JsonReader {
     private String source;
 

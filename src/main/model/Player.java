@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 // Referenced Thingy in JsonSerializationDemo
+// Referenced https://stleary.github.io/JSON-java/index.html
 
 // Represents a tennis player having a name, number of match wins, 
 // and number of match losses

@@ -7,7 +7,9 @@ import java.io.*;
 import model.Tournament;
 
 // Referenced JsonWriter in JsonSerializationDemo
+// Referenced https://stleary.github.io/JSON-java/index.html
 
+// Represents a writer that writes JSON representation of tennis tournament to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

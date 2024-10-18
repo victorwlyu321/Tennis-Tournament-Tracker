@@ -12,6 +12,7 @@ import model.Player;
 import model.Tournament;
 
 // Referenced JsonReaderTest in JsonSerializationDemo
+// Referenced https://stleary.github.io/JSON-java/index.html
 
 public class JsonReaderTest extends JsonTest {
 
