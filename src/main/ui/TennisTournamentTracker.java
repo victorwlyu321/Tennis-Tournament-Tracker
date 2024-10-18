@@ -7,6 +7,7 @@ import model.Player;
 import model.Tournament;
 
 // Referenced TellerApp and Flashcard Reviewer for UI structure, logic flow, and design
+// Referenced WorkRoomApp in JsonSerializationDemo for incorporating json reading and writing
 
 // A Tennis Tournament Tracker that allows users to add tennis players to a tournament, 
 // view the list of players, specify the winner and loser of a match, and view players' win-loss records
@@ -14,6 +15,7 @@ public class TennisTournamentTracker {
     private Tournament tournament;
     private Scanner input;
     private boolean isRunning;
+    // Fields for jsonReader and jsonWriter
 
     // EFFECTS: runs the tennis tournament tracker
     public TennisTournamentTracker() {
@@ -38,6 +40,7 @@ public class TennisTournamentTracker {
         this.tournament = new Tournament();
         this.input = new Scanner(System.in);
         this.isRunning = true;
+        // initialize jsonReader and JsonWriter
     }
 
     // EFFECTS: displays menu options to user
@@ -47,6 +50,7 @@ public class TennisTournamentTracker {
         System.out.println("v: View all players in the tournament");
         System.out.println("s: Specify the winner and loser of a match");
         System.out.println("r: View players' win-loss records");
+        // add options for save and load
         System.out.println("q: Exit the application");
     }
 
@@ -66,6 +70,7 @@ public class TennisTournamentTracker {
             case "r":
                 displayPlayerRecord();
                 break;
+            // add cases for save and load options
             case "q":
                 quitTracker();
                 break;
@@ -197,6 +202,17 @@ public class TennisTournamentTracker {
         System.out.println("Game, set, match!");
         System.out.println("Thank you for using the Tennis Tournament Tracker!");
         this.isRunning = false;
+    }
+
+    // EFFECTS: saves the tournament to file
+    private void saveTournament() {
+        // stub
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads tournament from file
+    private void loadTournament() {
+
     }
 
     // EFFECTS: prints out lines as dividers in console
