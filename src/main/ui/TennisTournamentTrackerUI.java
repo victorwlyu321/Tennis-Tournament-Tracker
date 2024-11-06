@@ -19,18 +19,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
-
 // Referenced C3-LectureLabStarter IntersectionGUI & TrafficLightGui, SmartHomeUI, AlarmControllerUI
 // Referenced https://www.youtube.com/watch?v=5o3fMLPY7qY Java GUI Tutorial - Make a GUI in 13 Minutes #99
 // Referenced https://stackoverflow.com/questions/6077709/button-size-and-position
+// Referenced https://www.geeksforgeeks.org/java-joptionpane/
 
 // Represents Tennis Tournament Tracker application's main window frame
 public class TennisTournamentTrackerUI extends JFrame implements ActionListener {
 
     private Tournament tn;
     private static final int WIDTH = 800;
-	private static final int HEIGHT = 600;
+    private static final int HEIGHT = 600;
     private JPanel trackerPanel;
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
@@ -55,6 +54,10 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         JButton saveButton = new JButton("Save");
         JButton loadButton = new JButton("Load");
 
+        addPlayerButton.setActionCommand("addPlayer");
+        addPlayerButton.addActionListener(this);
+        recordWinnerLoserButton.setActionCommand("recordPlayers");
+        recordWinnerLoserButton.addActionListener(this);
         saveButton.setActionCommand("saveButton");
         saveButton.addActionListener(this);
         loadButton.setActionCommand("loadButton");
@@ -66,28 +69,36 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         add(saveButton);
         add(loadButton);
 
-
-
         pack();
-		setVisible(true);
+        setVisible(true);
 
         jsonReader = new JsonReader(JSON_FILE);
         jsonWriter = new JsonWriter(JSON_FILE);
-
-
     }
-
-
 
     public static void main(String[] args) {
         new TennisTournamentTrackerUI();
     }
 
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("saveButton")) {
+        if (e.getActionCommand().equals("addPlayer")) {
+            String newPlayerName = JOptionPane.showInputDialog(null,
+            "Add Tennis Player",
+            "Enter New Tennis Player Name",
+            JOptionPane.QUESTION_MESSAGE);
+
+            if (newPlayerName != null) {
+                if (tn.addPlayer(newPlayerName)) {
+                    JOptionPane.showMessageDialog(null, newPlayerName + " has been successfully added to the tournament!");
+                    //System.out.println(newPlayerName + " has been successfully added to the tournament!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "The player entered is already in the tournament.");
+                }
+            }
+        } else if (e.getActionCommand().equals("recordPlayers")) {
+        
+        } else if (e.getActionCommand().equals("saveButton")) {
             try {
                 jsonWriter.open();
                 jsonWriter.write(tn);
@@ -96,11 +107,11 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
             } catch (FileNotFoundException f) {
                 System.out.println("Saving Tennis Tournament Tracker to " + JSON_FILE + "was UNSUCCESSFUL.");
             }
-        }
-        if (e.getActionCommand().equals("loadButton")) {
+        } else if (e.getActionCommand().equals("loadButton")) {
             try {
                 tn = jsonReader.read(); 
-                System.out.println("Your Tennis Tournament Tracker from " + JSON_FILE + "has been successfully loaded!");
+                System.out.println("Your Tennis Tournament Tracker from " 
+                        + JSON_FILE + "has been successfully loaded!");
             } catch (IOException i) {
                 System.out.println("Loading Tennis Tournament Tracker from " + JSON_FILE + "was UNSUCCESSFULL.");
             }
