@@ -88,7 +88,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
 
         setupPlayerList();
         setupButtons();
-        //setLayout(new BorderLayout());
+
         add(mainPanel, BorderLayout.CENTER);
         cardLayout.show(mainPanel, "Main Menu");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
