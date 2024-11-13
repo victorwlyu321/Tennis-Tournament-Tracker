@@ -10,11 +10,19 @@ import model.Player;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.GridLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.io.File;
 
 // Referenced C3-LectureLabStarter IntersectionGUI & TrafficLightGui, SmartHomeUI, AlarmControllerUI
 // Referenced https://www.youtube.com/watch?v=5o3fMLPY7qY Java GUI Tutorial - Make a GUI in 13 Minutes #99
@@ -33,14 +41,25 @@ import java.awt.event.ActionListener;
 // Referenced https://docs.oracle.com/javase/tutorial/displayCode.html?code=https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
 // Referenced https://docs.oracle.com/javase/7/docs/api/javax/swing/JScrollPane.html
 // Referenced https://www.w3schools.com/java/ref_string_startswith.asp
+// Referenced https://docs.oracle.com/javase/tutorial/uiswing/layout/box.html
+// Referenced https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JPanel.html
+// Referenced https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html - GridBagLayoutDemo.java
+// Referenced https://stackoverflow.com/questions/22933507/how-can-i-place-buttons-in-the-center-of-the-frame-in-a-vertical-line
+// Referenced https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JComponent.html
+// Referenced https://stackoverflow.com/questions/33282129/imageio-cannot-resolve-to-a-type
+// Referenced https://stackoverflow.com/questions/36445244/how-to-make-jbuttons-visible-on-a-jpanel-with-an-image-as-background
+// Referenced https://stackoverflow.com/questions/19125707/simplest-way-to-set-image-as-jpanel-background
+// Referenced https://stackoverflow.com/questions/22162398/how-to-set-a-background-picture-in-jpanel
 
 // Represents Tennis Tournament Tracker application's main window frame
 public class TennisTournamentTrackerUI extends JFrame implements ActionListener {
 
     private Tournament tn;
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+    private static final int WIDTH = 1200;
+    private static final int HEIGHT = 900;
     private JPanel mainPanel;
+    private Image menuBackgroundImage;
+    private Image trackerBackgroundImage;
     private JPanel menuPanel;
     private JPanel trackerPanel;
     private CardLayout cardLayout;
@@ -48,6 +67,8 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
     private JsonWriter jsonWriter;
     private DefaultListModel<String> listModel;
     private JList<String> playerList;
+    private GridBagConstraints menuConstraints;
+    private GridBagConstraints trackerConstraints;
     private static final String JSON_FILE = "./data/TennisTournamentTracker.json";
 
     // MODIFIES: this
@@ -56,27 +77,59 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
     // sets up buttons, and initializes tournament
     public TennisTournamentTrackerUI() {
         super("Tennis Tournament Tracker");
+        
+        setupMenuPanel();
+        setupTrackerPanel();
+
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
-        menuPanel = new JPanel();
-        trackerPanel = new JPanel();
-
         mainPanel.add(menuPanel, "Main Menu");
         mainPanel.add(trackerPanel, "Tracker Page");
 
         setupPlayerList();
         setupButtons();
-
+        //setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
         cardLayout.show(mainPanel, "Main Menu");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(0, 1));
         pack();
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
         setVisible(true);
 
         initializeTournament();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets up menu panel and background image
+    private void setupMenuPanel() {
+        try {
+            menuBackgroundImage = ImageIO.read(new File("images/tennis-court.jpg"));
+        } catch (IOException e) {
+            fail("Main menu background image file not found!");
+        }
+        menuPanel = new BackgroundImagePanel(menuBackgroundImage);    
+        menuPanel.setLayout(new GridBagLayout());
+        menuConstraints = new GridBagConstraints();
+        menuConstraints.gridwidth = GridBagConstraints.REMAINDER;
+        menuConstraints.fill = GridBagConstraints.HORIZONTAL;
+        menuConstraints.insets = new Insets(5,0,5,0);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets up tracker panel and background image
+    private void setupTrackerPanel() {
+        try {
+            trackerBackgroundImage = ImageIO.read(new File("images/goats.jpg"));
+        } catch (IOException e) {
+            fail("Tracker page background image file not found!");
+        }
+        trackerPanel = new BackgroundImagePanel(trackerBackgroundImage);
+        trackerPanel.setLayout(new GridBagLayout());
+        trackerConstraints = new GridBagConstraints();
+        trackerConstraints.gridwidth = GridBagConstraints.REMAINDER;
+        trackerConstraints.fill = GridBagConstraints.HORIZONTAL;
+        trackerConstraints.insets = new Insets(5,5,5,5);
     }
 
     // MODIFIES: this
@@ -90,22 +143,27 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         addButtonToTrackerPanel("Back", "backButton");
     }
 
+    // REQUIRES: non-zero length strings for the button's name and action command
     // MODIFIES: this
     // EFFECTS: creates button and adds button to the menu panel
     private void addButtonToMenuPanel(String buttonName, String actionCommand) {
         JButton button = new JButton(buttonName);
         button.setActionCommand(actionCommand);
         button.addActionListener(this);
-        menuPanel.add(button);
+        menuPanel.add(button, menuConstraints);
     }
 
+    // REQUIRES: non-zero length strings for the button's name and action command
     // MODIFIES: this
     // EFFECTS: creates button and adds button to the tracker panel
     private void addButtonToTrackerPanel(String buttonName, String actionCommand) {
         JButton button = new JButton(buttonName);
+        trackerConstraints.gridwidth = 1;
+        trackerConstraints.gridy = 1;
         button.setActionCommand(actionCommand);
         button.addActionListener(this);
-        trackerPanel.add(button);
+        button.setPreferredSize(new Dimension(200, 30));
+        trackerPanel.add(button, trackerConstraints);
     }
 
     // MODIFIES: this
@@ -145,12 +203,14 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         }
     }
 
+    // REQUIRES: non-zero length string for panel name
     // MODIFIES: this
     // EFFECTS: show menu page in application
     private void showMenuPanel(String panelName) {
         cardLayout.show(mainPanel, panelName);
     }
 
+    // REQUIRES: non-zero length string for panel name
     // MODIFIES: this
     // EFFECTS: show tracker page in application
     private void showTrackerPanel(String panelName) {
@@ -269,6 +329,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         }
     }
 
+    // REQUIRES: non-zero length strings for input dialogue's message, title, and message type that exists
     // EFFECTS: displays input dialogues to user
     private String displayInputDialogue(String message, String title, int messageType) {
         return JOptionPane.showInputDialog(null,
@@ -277,6 +338,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
                 messageType);
     }
 
+    // REQUIRES: non-zero length strings for message dialogue's message, title, and message type that exists
     // EFFECTS: displays message dialogues to user
     private void displayMessageDialogue(String message, String title, int messageType) {
         JOptionPane.showMessageDialog(null,
@@ -293,9 +355,12 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         playerList = new JList<>(listModel);
         playerList.setFixedCellWidth(500);
         JScrollPane listScrollPane = new JScrollPane(playerList);
+        listScrollPane.setPreferredSize(new Dimension(500, 250));
+        listScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         listScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-        trackerPanel.add(listScrollPane, BorderLayout.CENTER);
+        
+        trackerConstraints.gridy = 0;
+        trackerPanel.add(listScrollPane, trackerConstraints);
     }
 
     // MODIFIES: this
