@@ -10,8 +10,6 @@ import model.Player;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -106,7 +104,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         try {
             menuBackgroundImage = ImageIO.read(new File("images/tennis-court.jpg"));
         } catch (IOException e) {
-            fail("Main menu background image file not found!");
+            System.out.println("Main menu background image file not found!");
         }
         menuPanel = new BackgroundImagePanel(menuBackgroundImage);    
         menuPanel.setLayout(new GridBagLayout());
@@ -122,7 +120,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         try {
             trackerBackgroundImage = ImageIO.read(new File("images/goats.jpg"));
         } catch (IOException e) {
-            fail("Tracker page background image file not found!");
+            System.out.println("Tracker page background image file not found!");
         }
         trackerPanel = new BackgroundImagePanel(trackerBackgroundImage);
         trackerPanel.setLayout(new GridBagLayout());
