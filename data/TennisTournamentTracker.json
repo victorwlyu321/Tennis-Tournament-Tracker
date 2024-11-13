@@ -1,12 +1,17 @@
 {"players": [
     {
-        "wins": 1,
+        "wins": 2,
         "name": "Roger Federer",
         "losses": 0
     },
     {
         "wins": 0,
         "name": "Rafael Nadal",
-        "losses": 1
+        "losses": 2
+    },
+    {
+        "wins": 0,
+        "name": "Novak Djokovic",
+        "losses": 0
     }
 ]}

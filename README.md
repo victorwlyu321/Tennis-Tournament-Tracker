@@ -12,3 +12,20 @@ This tracker is designed for tennis fans, coaches, players, as well as tennis to
  - I want to be able to view a player's win-loss record
  - As a user, I want to be able to save my Tennis Tournament Tracker if I like
  - As a user, I want to be able to load a Tennis Tournament Tracker from file if I like
+
+ ## Instructions for End User
+
+ - You can generate the first required action related to the user story "adding multiple Xs to a Y" by:
+    1) clicking the "Enter Tournament!" button in the Main Menu
+    2) clicking the "Add Player" button
+    3) entering the tennis player's name
+    4) clicking the "OK" button
+ - You can generate the second required action related to the user story "adding multiple Xs to a Y" by...
+    1) clicking the "Enter Tournament!" button in the Main Menu
+    2) adding at least 2 tennis players into the tournament
+    3) clicking the "Record Winner & Loser" button
+    4) entering the winner's name and click "OK"
+    5) entering the loser's name and click "OK"
+ - You can locate my visual component in the Main Menu and on the page after clicking "Enter Tournament!" 
+ - You can save the state of my application by clicking the "Save" button in the Main Menu
+ - You can reload the state of my application by clicking the "Load" button in the Main Menu
