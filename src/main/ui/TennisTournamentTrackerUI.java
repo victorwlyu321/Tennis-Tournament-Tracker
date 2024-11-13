@@ -251,7 +251,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
                 "Add Tennis Player",
                 JOptionPane.QUESTION_MESSAGE);
 
-        if (newPlayerName != null && newPlayerName.length() != 0) {
+        if (newPlayerName != null && !newPlayerName.isEmpty()) {
             if (tn.addPlayer(newPlayerName)) {
                 Player player = tn.findPlayer(newPlayerName);
                 addPlayerInfoToPlayerList(player);
@@ -279,7 +279,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
             winner = displayInputDialogue("Enter Winner's Name", "Record Winner & Loser",
                     JOptionPane.QUESTION_MESSAGE);
 
-            if (winner != null && winner.length() != 0) {
+            if (winner != null && !winner.isEmpty()) {
                 Player player = tn.findPlayer(winner);
                 if (player != null) {
                     player.increaseMatchWin();
@@ -307,7 +307,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         while (true) {
             String loser = displayInputDialogue("Enter Loser's Name", "Record Winner & Loser",
                     JOptionPane.QUESTION_MESSAGE);
-            if (loser == null || loser.length() == 0) {
+            if (loser == null || !loser.isEmpty()) {
                 break;
             }
             if (loser.equals(prevWinner)) {
