@@ -307,7 +307,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         while (true) {
             String loser = displayInputDialogue("Enter Loser's Name", "Record Winner & Loser",
                     JOptionPane.QUESTION_MESSAGE);
-            if (loser == null || !loser.isEmpty()) {
+            if (loser == null || loser.isEmpty()) {
                 break;
             }
             if (loser.equals(prevWinner)) {
