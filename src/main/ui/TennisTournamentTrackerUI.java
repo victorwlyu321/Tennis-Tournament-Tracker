@@ -221,7 +221,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
             jsonWriter.open();
             jsonWriter.write(tn);
             jsonWriter.close();
-            System.out.println("Your Tennis Tournament Tracker has been saved to " + JSON_FILE + "!");
+            //System.out.println("Your Tennis Tournament Tracker has been saved to " + JSON_FILE + "!");
         } catch (FileNotFoundException f) {
             System.out.println("Saving Tennis Tournament Tracker to " + JSON_FILE + "was UNSUCCESSFUL.");
         }
@@ -233,8 +233,8 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         try {
             tn = jsonReader.read();
             addPlayerInfoToPlayerListUponLoad(tn);
-            System.out.println("Your Tennis Tournament Tracker from "
-                    + JSON_FILE + " has been successfully loaded!");
+            //System.out.println("Your Tennis Tournament Tracker from "
+            //        + JSON_FILE + " has been successfully loaded!");
         } catch (IOException i) {
             System.out.println("Loading Tennis Tournament Tracker from " + JSON_FILE + "was UNSUCCESSFULL.");
         }
