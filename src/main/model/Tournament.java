@@ -9,6 +9,7 @@ import persistence.Writable;
 
 // Referenced WorkRoom in JsonSerializationDemo
 // Referenced https://stleary.github.io/JSON-java/index.html
+// Referenced https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 
 // Represents a tennis tournament having a list of participating tennis players
 public class Tournament implements Writable {
@@ -35,6 +36,7 @@ public class Tournament implements Writable {
             Player newPlayer = new Player(name);
             this.players.add(newPlayer);
             newPlayerAdded = true;
+            EventLog.getInstance().logEvent(new Event(name + " has been successfully added to the tournament!"));
         }
         return newPlayerAdded;
     }

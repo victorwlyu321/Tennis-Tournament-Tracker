@@ -6,6 +6,7 @@ import persistence.Writable;
 
 // Referenced Thingy in JsonSerializationDemo
 // Referenced https://stleary.github.io/JSON-java/index.html
+// Referenced https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 
 // Represents a tennis player having a name, number of match wins, 
 // and number of match losses
@@ -27,12 +28,14 @@ public class Player implements Writable {
     // EFFECTS: increment player's number of match wins
     public void increaseMatchWin() {
         this.wins += 1;
+        EventLog.getInstance().logEvent(new Event(this.name + "'s match wins have increased by 1!"));
     }
 
     // MODIFIES: this
     // EFFECTS: increment player's number of match losses
     public void increaseMatchLoss() {
         this.losses += 1;
+        EventLog.getInstance().logEvent(new Event(this.name + "'s match losses have increased by 1!"));
     }
 
     // getter

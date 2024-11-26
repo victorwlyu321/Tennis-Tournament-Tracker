@@ -6,6 +6,8 @@ import java.io.IOException;
 import javax.swing.*;
 
 import model.Tournament;
+import model.Event;
+import model.EventLog;
 import model.Player;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -15,6 +17,8 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -48,9 +52,11 @@ import java.io.File;
 // Referenced https://stackoverflow.com/questions/36445244/how-to-make-jbuttons-visible-on-a-jpanel-with-an-image-as-background
 // Referenced https://stackoverflow.com/questions/19125707/simplest-way-to-set-image-as-jpanel-background
 // Referenced https://stackoverflow.com/questions/22162398/how-to-set-a-background-picture-in-jpanel
+// Referenced https://docs.oracle.com/javase/tutorial/uiswing/events/windowlistener.html
+// Referenced https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 
 // Represents Tennis Tournament Tracker application's main window frame
-public class TennisTournamentTrackerUI extends JFrame implements ActionListener {
+public class TennisTournamentTrackerUI extends JFrame implements ActionListener, WindowListener {
 
     private Tournament tn;
     private static final int WIDTH = 1200;
@@ -71,8 +77,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
 
     // MODIFIES: this
     // EFFECTS: creates TennisTournamentTrackerUI, sets up JFrame, menu and tracker
-    // panels, sets up player list, 
-    // sets up buttons, and initializes tournament
+    // panels, sets up player list, sets up buttons, and initializes tournament
     public TennisTournamentTrackerUI() {
         super("Tennis Tournament Tracker");
         
@@ -96,6 +101,7 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         setVisible(true);
 
         initializeTournament();
+        addWindowListener(this);
     }
 
     // MODIFIES: this
@@ -393,7 +399,51 @@ public class TennisTournamentTrackerUI extends JFrame implements ActionListener 
         }
     }
 
+    // EFFECTS: prints event log events to console when application is closed
+    @Override
+    public void windowClosing(WindowEvent e) {
+        for (Event event : EventLog.getInstance()) {
+            System.out.println(event.getDate() + " - " + event.getDescription());
+        }
+    }
+
     public static void main(String[] args) {
         new TennisTournamentTrackerUI();
+    }
+
+    // EFFECTS: Does nothing when window opened
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    // EFFECTS: Does nothing when window closed
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    // EFFECTS: Does nothing when window iconified
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    // EFFECTS: Does nothing when window deiconified
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    // EFFECTS: Does nothing when window activated
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    // EFFECTS: Does nothing when window deactivated
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }

@@ -29,3 +29,14 @@ This tracker is designed for tennis fans, coaches, players, as well as tennis to
  - You can locate my visual component in the Main Menu and on the page after clicking "Enter Tournament!" 
  - You can save the state of my application by clicking the "Save" button in the Main Menu
  - You can reload the state of my application by clicking the "Load" button in the Main Menu
+
+
+## Phase 4: Task 2 - Event Log Sample
+
+Mon Nov 25 00:40:59 PST 2024 - Roger Federer has been successfully added to the tournament!<br/>
+Mon Nov 25 00:41:11 PST 2024 - Rafael Nadal has been successfully added to the tournament!<br/>
+Mon Nov 25 00:41:16 PST 2024 - Roger Federer's match wins have increased by 1!<br/>
+Mon Nov 25 00:41:19 PST 2024 - Rafael Nadal's match losses have increased by 1!<br/>
+Mon Nov 25 00:41:24 PST 2024 - Rafael Nadal's match wins have increased by 1!<br/>
+Mon Nov 25 00:41:27 PST 2024 - Roger Federer's match losses have increased by 1!<br/>
+Mon Nov 25 00:41:34 PST 2024 - Novak Djokovic has been successfully added to the tournament!<br/>
