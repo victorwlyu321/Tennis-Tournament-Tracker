@@ -40,3 +40,7 @@ Mon Nov 25 00:41:19 PST 2024 - Rafael Nadal's match losses have increased by 1!<
 Mon Nov 25 00:41:24 PST 2024 - Rafael Nadal's match wins have increased by 1!<br/>
 Mon Nov 25 00:41:27 PST 2024 - Roger Federer's match losses have increased by 1!<br/>
 Mon Nov 25 00:41:34 PST 2024 - Novak Djokovic has been successfully added to the tournament!<br/>
+
+## Phase 4: Task 3
+
+I would refactor my TennisTournamentTrackerUI class to break it into smaller, separate classes so that all the functionality related to the UI does not exist in a single class and file, which makes finding code and debugging more difficult and reduces readability. I can possibly create a menu class and a tracker class for the 2 different pages (panels) in my app. This will help improve the single responsibility principle and increase readability. Another area suitable for refactoring is the specifyWinner and specifyLoser methods in both TennisTournamentTracker and TennisTournamentTrackerUI. They have very similar code and parts of them can be extracted into their own methods, rather than duplicating code. This will also help with increasing code readibility as their method sizes are reduced and improve coupling by abstracting duplicated code into methods. The specifyWinner and specifyLoser methods in TennisTournamentTrackerUI specifically are fairly long which makes it more difficult to understand its function, so they can benefit from having methods extracted to capture the behaviour of the original methods.
